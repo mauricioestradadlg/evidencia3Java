@@ -1,0 +1,106 @@
+
+Algoritmos de Ordenamiento:
+
+1-Merge Sort
+2-Quick Sort
+3-Shell Sort
+4-Selection Sort
+5-Insertion Sort
+6-Bubble Sort
+
+
+
+Datos de prueba:
+
+1-100 elementos generados aleatoriamente. 
+2-50,000 elementos generados aleatoriamente. 
+3-100,000 elementos generados aleatoriamente. 
+4-100,000 elementos restringidos a números entre 1 y 5 
+
+
+
+* Programa:
+
+-Interacción del Usuario: 
+
+1-El programa solicitará al usuario especificar 
+el tiempo total de ejecución. 
+
+2-Durante este tiempo, 
+los algoritmos deberán operar de manera concurrente. 
+
+
+-Ejecución Concurrente: 
+
+1-Cada algoritmo de ordenamiento debe ejecutarse en su 
+propio hilo de ejecución. 
+
+2-El objetivo es contar cuántas 
+colecciones son ordenadas por cada algoritmo en el tiempo 
+especificado por el usuario. 
+
+
+-Salida del Programa: 
+
+1-Informar cuántas colecciones ha ordenado cada algoritmo 
+durante el tiempo establecido. 
+
+2-Informar el promedio de tiempo de ejecución por cada 
+colección de cada algoritmo 
+
+3-Identificar los algoritmos que completaron el ordenamiento de todas las 
+colecciones generadas dentro del tiempo especificado. 
+
+4-Ordenar los algoritmos desde el más eficiente al menos eficiente 
+según su rendimiento. 
+
+
+
+-Consideraciones Generales: 
+
+1-Uso de Hilos (Threads) de Java: 
+
+Implementa cada algoritmo de ordenamiento en su 
+propio hilo para permitir la ejecución concurrente. 
+Esto es crucial para comparar el rendimiento bajo condiciones similares. 
+
+
+
+2-Generación de Colecciones: 
+
+Utiliza la clase Random para generar números aleatorios. Crea métodos 
+o funciones específicas para la generación de cada tipo de colección 
+requerida (100 elementos al azar, 50,000 elementos al azar, etc.), asegurando 
+que los datos sean adecuados para las pruebas. 
+
+
+
+3-Medición del Tiempo de Ejecución: 
+
+Dado el caso, se recomienda utilizar System.currentTimeMillis() para registrar 
+el tiempo antes y después de ejecutar cada algoritmo. Esto ayudará a medir la 
+eficiencia y efectividad de los algoritmos bajo condiciones controladas. 
+
+
+
+4-Comparación de Eficiencia: 
+
+Desarrolla una estructura de datos, como un HashMap, para almacenar y comparar los 
+tiempos de ejecución de cada algoritmo con diferentes tipos de colecciones. Esto 
+facilitará la evaluación objetiva de la eficiencia. 
+
+
+
+5-Presentación de Resultados: 
+
+Utiliza la consola para imprimir los resultados de los tiempos de ejecución, 
+el estado de cada algoritmo (si completó el ordenamiento de todas las colecciones) y 
+cualquier otra información relevante que ayude a evaluar el desempeño de los algoritmos. 
+
+
+6-Cálculo del Nivel de Eficiencia: 
+
+Investiga y calcula la complejidad temporal teórica de cada algoritmo. Compara estos valores 
+teóricos con los tiempos de ejecución reales para obtener una medida clara de eficiencia. 
+ 
+
