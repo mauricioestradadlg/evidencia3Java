@@ -49,7 +49,7 @@ public class evidencia3 {
             System.out.println("\nMerge Sort:");
             imprimirArreglo(arregloAl);
 
-    
+  
 
 
  
@@ -77,8 +77,7 @@ public class evidencia3 {
             arregloAl = arreglo4.clone();
             bubbleSort(arregloAl);
             System.out.println("\nBubble Sort:");
-            imprimirArreglo(arregloAl);
-            
+            imprimirArreglo(arregloAl);    
 
 
 
@@ -110,7 +109,8 @@ public class evidencia3 {
             System.out.println("\nShell Sort:");
             imprimirArreglo(arregloAl);
 
-        
+
+
 
         // SELECTION SORT
         arreglo1 = generarArreglo(100);
@@ -140,7 +140,7 @@ public class evidencia3 {
 
 
 
-
+   
          // INSERTION SORT
          arreglo1 = generarArreglo(100);
          arregloAl = arreglo1.clone();
@@ -166,7 +166,7 @@ public class evidencia3 {
          insertionSort(arregloAl);
          System.out.println("\nInsertion Sort:");
          imprimirArreglo(arregloAl);
-       
+ 
 
 
          
@@ -174,27 +174,28 @@ public class evidencia3 {
          arreglo1 = generarArreglo(100);
          arregloAl = arreglo1.clone();
          quickSort(arregloAl, 0, arregloAl.length - 1);
-         System.out.println("\nInsertion Sort:");
+         System.out.println("\nQuick Sort:");
          imprimirArreglo(arregloAl);
  
          arreglo2 = generarArreglo(50000);
          arregloAl = arreglo2.clone();
          quickSort(arregloAl, 0, arregloAl.length - 1);
-         System.out.println("\nInsertion Sort:");
+         System.out.println("\nQuick Sort:");
          imprimirArreglo(arregloAl);
  
  
          arreglo3 = generarArreglo(100000);
          arregloAl = arreglo3.clone();
          quickSort(arregloAl, 0, arregloAl.length - 1);
-         System.out.println("\nInsertion Sort:");
+         System.out.println("\nQuick Sort:");
          imprimirArreglo(arregloAl);
          
          arreglo4 = generarArregloV2(100000);
          arregloAl = arreglo4.clone();
          quickSort(arregloAl, 0, arregloAl.length - 1);
-         System.out.println("\nInsertion Sort:");
+         System.out.println("\nQuick Sort:");
          imprimirArreglo(arregloAl);
+         
 
             // Tomar el tiempo de finalización
             endTime = System.currentTimeMillis();

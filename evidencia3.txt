@@ -1,12 +1,14 @@
 
 Algoritmos de Ordenamiento:
 
-1-Merge Sort
-2-Bubble Sort
-3-Shell Sort
-4-Selection Sort
-5-Insertion Sort  
-6-Quick Sort
+1-Merge Sort (0.312 segundos)
+2-Bubble Sort (18 segundos)
+3-Shell Sort (0.248 segundos)
+4-Selection Sort (3 segundos)
+5-Insertion Sort  (2 segundos)
+6-Quick Sort (0.419 segundos)
+
+6 algoritmos - 25 segundos
 
 
 
