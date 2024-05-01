@@ -2,11 +2,11 @@
 Algoritmos de Ordenamiento:
 
 1-Merge Sort
-2-Quick Sort
+2-Bubble Sort
 3-Shell Sort
 4-Selection Sort
-5-Insertion Sort
-6-Bubble Sort
+5-Insertion Sort  
+6-Quick Sort
 
 
 
