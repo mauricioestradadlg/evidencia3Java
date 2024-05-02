@@ -1,254 +1,91 @@
 
-import java.util.Scanner;
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
+import java.util.concurrent.*;
+
 
 
 public class evidencia3 {
     public static void main(String[] args) {
 
-        long startTime, endTime, duration;
-        
-        int [] arreglo1;
-        int [] arreglo2;
-        int [] arreglo3;
-        int [] arreglo4;
-        int [] arregloAl;
-      
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el tiempo total de ejecución en segundos: ");
+        int tiempoTotal = scanner.nextInt();
 
-        //ALGORITMO
+        ExecutorService executor = Executors.newFixedThreadPool(6);
+        Map<String, Integer> ordenados = new ConcurrentHashMap<>();
+        Map<String, Double> tiempos = new ConcurrentHashMap<>();
 
-        // Tomar el tiempo de inicio
-        startTime = System.currentTimeMillis();
+        List<Future<?>> futures = new ArrayList<>();
 
-            
-            // MERGE SORT
-
-            arreglo1 = generarArreglo(100);
-            arregloAl = arreglo1.clone();
-            mergeSort(arregloAl);
-            System.out.println("\nMerge Sort:");
-            imprimirArreglo(arregloAl);
-
-            arreglo2 = generarArreglo(50000);
-            arregloAl = arreglo2.clone();
-            mergeSort(arregloAl);
-            System.out.println("\nMerge Sort:");
-            imprimirArreglo(arregloAl);
-
-
-            arreglo3 = generarArreglo(100000);
-            arregloAl = arreglo3.clone();
-            mergeSort(arregloAl);
-            System.out.println("\nMerge Sort:");
-            imprimirArreglo(arregloAl);
-            
-            arreglo4 = generarArregloV2(100000);
-            arregloAl = arreglo4.clone();
-            mergeSort(arregloAl);
-            System.out.println("\nMerge Sort:");
-            imprimirArreglo(arregloAl);
-
-  
-
-
- 
-            // BUBBLE SORT
-            arreglo1 = generarArreglo(100);
-            arregloAl = arreglo1.clone();
-            bubbleSort(arregloAl);
-            System.out.println("\nBubble Sort:");
-            imprimirArreglo(arregloAl);
-
-            arreglo2 = generarArreglo(50000);
-            arregloAl = arreglo2.clone();
-            bubbleSort(arregloAl);
-            System.out.println("\nBubble Sort:");
-            imprimirArreglo(arregloAl);
- 
-
-            arreglo3 = generarArreglo(100000);
-            arregloAl = arreglo3.clone();
-            bubbleSort(arregloAl);
-            System.out.println("\nBubble Sort:");
-            imprimirArreglo(arregloAl);
-            
-            arreglo4 = generarArregloV2(100000);
-            arregloAl = arreglo4.clone();
-            bubbleSort(arregloAl);
-            System.out.println("\nBubble Sort:");
-            imprimirArreglo(arregloAl);    
-
-
-
-
-
-            // SHELL SORT
-            arreglo1 = generarArreglo(100);
-            arregloAl = arreglo1.clone();
-            shellSort(arregloAl);
-            System.out.println("\nShell Sort:");
-            imprimirArreglo(arregloAl);
- 
-            arreglo2 = generarArreglo(50000);
-            arregloAl = arreglo2.clone();
-            shellSort(arregloAl);
-            System.out.println("\nShell Sort:");
-            imprimirArreglo(arregloAl);
- 
-
-            arreglo3 = generarArreglo(100000);
-            arregloAl = arreglo3.clone();
-            shellSort(arregloAl);
-            System.out.println("\nShell Sort:");
-            imprimirArreglo(arregloAl);
-            
-            arreglo4 = generarArregloV2(100000);
-            arregloAl = arreglo4.clone();
-            shellSort(arregloAl);
-            System.out.println("\nShell Sort:");
-            imprimirArreglo(arregloAl);
-
-
-
-
-        // SELECTION SORT
-        arreglo1 = generarArreglo(100);
-        arregloAl = arreglo1.clone();
-        selectionSort(arregloAl);
-        System.out.println("\nSelection Sort:");
-        imprimirArreglo(arregloAl);
-
-        arreglo2 = generarArreglo(50000);
-        arregloAl = arreglo2.clone();
-        selectionSort(arregloAl);
-        System.out.println("\nSelection Sort:");
-        imprimirArreglo(arregloAl);;
-
-
-        arreglo3 = generarArreglo(100000);
-        arregloAl = arreglo3.clone();
-        selectionSort(arregloAl);
-        System.out.println("\nSelection Sort:");
-        imprimirArreglo(arregloAl);
-        
-        arreglo4 = generarArregloV2(100000);
-        arregloAl = arreglo4.clone();
-        selectionSort(arregloAl);
-        System.out.println("\nSelection Sort:");
-        imprimirArreglo(arregloAl);
-
-
-
-   
-         // INSERTION SORT
-         arreglo1 = generarArreglo(100);
-         arregloAl = arreglo1.clone();
-         insertionSort(arregloAl);
-         System.out.println("\nInsertion Sort:");
-         imprimirArreglo(arregloAl);
- 
-         arreglo2 = generarArreglo(50000);
-         arregloAl = arreglo2.clone();
-         insertionSort(arregloAl);
-         System.out.println("\nInsertion Sort:");
-         imprimirArreglo(arregloAl);
- 
- 
-         arreglo3 = generarArreglo(100000);
-         arregloAl = arreglo3.clone();
-         insertionSort(arregloAl);
-         System.out.println("\nInsertion Sort:");
-         imprimirArreglo(arregloAl);
-         
-         arreglo4 = generarArregloV2(100000);
-         arregloAl = arreglo4.clone();
-         insertionSort(arregloAl);
-         System.out.println("\nInsertion Sort:");
-         imprimirArreglo(arregloAl);
- 
-
-
-         
-         // QUICK SORT
-         arreglo1 = generarArreglo(100);
-         arregloAl = arreglo1.clone();
-         quickSort(arregloAl, 0, arregloAl.length - 1);
-         System.out.println("\nQuick Sort:");
-         imprimirArreglo(arregloAl);
- 
-         arreglo2 = generarArreglo(50000);
-         arregloAl = arreglo2.clone();
-         quickSort(arregloAl, 0, arregloAl.length - 1);
-         System.out.println("\nQuick Sort:");
-         imprimirArreglo(arregloAl);
- 
- 
-         arreglo3 = generarArreglo(100000);
-         arregloAl = arreglo3.clone();
-         quickSort(arregloAl, 0, arregloAl.length - 1);
-         System.out.println("\nQuick Sort:");
-         imprimirArreglo(arregloAl);
-         
-         arreglo4 = generarArregloV2(100000);
-         arregloAl = arreglo4.clone();
-         quickSort(arregloAl, 0, arregloAl.length - 1);
-         System.out.println("\nQuick Sort:");
-         imprimirArreglo(arregloAl);
-         
-
-            // Tomar el tiempo de finalización
-            endTime = System.currentTimeMillis();
-    
-            // Calcular la duración de la ejecución
-            duration = endTime - startTime;
-            
-            if(duration >= 1000){
-
-                duration = duration/1000;
-                System.out.println("Tiempo de ejecución: " + duration + " segundos");
-            }
-            else{
-                System.out.println("Tiempo de ejecución: " + duration + " milisegundos");
-
-            }
-            
+        for (String algoritmo : Arrays.asList("Merge Sort", "Bubble Sort", "Shell Sort", "Selection Sort", "Insertion Sort", "Quick Sort")) {
+            Future<?> future = executor.submit(() -> {
+                long startTime = System.currentTimeMillis();
+                int ordenadosPorAlgoritmo = 0;
+                while (System.currentTimeMillis() - startTime < tiempoTotal * 1000) {
+                    int[] arreglo = generarArreglo(100); // Cambiar el tamaño del arreglo según sea necesario
+                    ordenar(arreglo, algoritmo);
+                    ordenadosPorAlgoritmo++;
+                }
+                ordenados.put(algoritmo, ordenadosPorAlgoritmo);
+                double tiempoPromedio = (double) (System.currentTimeMillis() - startTime) / ordenadosPorAlgoritmo;
+                tiempos.put(algoritmo, tiempoPromedio);
+            });
+            futures.add(future);
         }
 
-    
-        
-        /* 
-
-        //INICIO
-
-        Scanner scanner = new Scanner(System.in);
-        
-        System.out.print("Ingrese el tiempo de ejecución en segundos: ");
-        int duration = scanner.nextInt();
-        
-        long start = System.currentTimeMillis();
-        long end = start + duration * 1000; // Convertir segundos a milisegundos
-
-        //Algoritmo
-
-        while (System.currentTimeMillis() < end) {
-            System.out.println("Hola mundo");
-            // Pausa de 1 segundo para no imprimir demasiado rápido
+        for (Future<?> future : futures) {
             try {
-                Thread.sleep(1000); // Pausa de 1 segundo
-            } catch (InterruptedException e) {
+                future.get();
+            } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
         }
 
-        //FIN
-        
-        System.out.println("Tiempo de ejecución terminado.");
-        scanner.close();
+        executor.shutdown();
 
-*/
-        
+        // Ordenar algoritmos por eficiencia
+        List<Map.Entry<String, Double>> list = new ArrayList<>(tiempos.entrySet());
+        list.sort(Map.Entry.comparingByValue());
+
+        System.out.println("Resultados:");
+        for (Map.Entry<String, Double> entry : list) {
+            String algoritmo = entry.getKey();
+            int cantidadOrdenada = ordenados.get(algoritmo);
+            double tiempoPromedio = entry.getValue();
+            // Redondear el tiempo promedio a 5 decimales
+            String tiempoFormateado = String.format("%.5f", tiempoPromedio);
+            System.out.println(algoritmo + ": Colecciones ordenadas = " + cantidadOrdenada + ", Tiempo promedio por colección = " + tiempoFormateado + " ms");
+        }
+            
+        }
+
+        public static void ordenar(int[] arreglo, String algoritmo) {
+            switch (algoritmo) {
+                case "Merge Sort":
+                    mergeSort(arreglo);
+                    break;
+                case "Bubble Sort":
+                    bubbleSort(arreglo);
+                    break;
+                case "Shell Sort":
+                    shellSort(arreglo);
+                    break;
+                case "Selection Sort":
+                    selectionSort(arreglo);
+                    break;
+                case "Insertion Sort":
+                    insertionSort(arreglo);
+                    break;
+                case "Quick Sort":
+                    quickSort(arreglo, 0, arreglo.length - 1);
+                    break;
+                default:
+                    break;
+            }
+        }
+
     
+       
 
     public static int[] generarArreglo(int size) {
         int[] arr = new int[size];
