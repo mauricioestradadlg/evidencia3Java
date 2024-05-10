@@ -2,151 +2,103 @@ import java.util.*;
 import java.util.concurrent.*;
 
 public class evidencia3 {
-    public static void main(String[] args) {
+    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-        boolean ciclo = true;
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        while (true) {
+            System.out.println("EVIDENCIA 3 JAVA:");
+            System.out.print("Presiona 1 para continuar \nPresiona 2 para salir \nElige una opcion: ");
+            int option = scanner.nextInt();
 
-        while(ciclo){
-
-            System.out.println("EVIDENCIA 3 JAVA: ");
-        System.out.print("Presiona 1 para continuar \nPresiona 2 para salir \nElige una opcion: ");
-        int option = scanner.nextInt();
-
-        switch(option){
-
-            case 1:
-            algoritmo();
-
-            System.out.println("\n");
-            System.out.print("Quieres hacer otra prueba? \nPresiona 1 para continuar \nPresiona 2 para salir \nElige una opcion: ");
-            int opcion = scanner.nextInt();
-
-            if(opcion== 1){
-                System.out.println("\n \n");
+            switch (option) {
+                case 1:
+                    algoritmo();
+                    break;
+                case 2:
+                    scheduler.shutdown(); // Detener el scheduler
+                    return;
+                default:
+                    System.out.println("\nElige una opcion valida!!!\n");
+                    break;
             }
-            else if(opcion == 2){
-                ciclo = false;
-            }
-
-                break;
-            case 2:
-                ciclo = false;
-                break;
-            default:
-                System.out.println("\n");
-                System.out.println("Elige una opcion valida!!!");
-                System.out.println("\n");
-                break;        
         }
-
-        }
-
-        
-
-        
-
-
     }
 
-    public static void algoritmo(){
-
-       
+    public static void algoritmo() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("\n");
-        System.out.print("Ingrese el tiempo total de ejecución en segundos: ");
+        System.out.print("\nIngrese el tiempo total de ejecución en segundos: ");
         int tiempoTotal = scanner.nextInt();
-    
-        // Crear un ExecutorService que manejará la ejecución de las tareas de ordenamiento
+
         ExecutorService executor = Executors.newFixedThreadPool(6);
-
-        // Mapa para almacenar el número de colecciones ordenadas por cada algoritmo
         Map<String, Integer> ordenados = new ConcurrentHashMap<>();
-
-        // Mapa para almacenar el tiempo promedio por colección para cada algoritmo
         Map<String, Double> tiempos = new ConcurrentHashMap<>();
-    
-        // Lista de objetos Future que contendrán los resultados de las tareas de ordenamiento
+
         List<Future<?>> futures = new ArrayList<>();
-    
-        // Lista de tamaños de arreglos que se utilizarán en las pruebas de ordenamiento
-        List<Integer> tamaños = Arrays.asList(100, 50000, 100000, 100000);
-        
-        // Iterar sobre cada algoritmo de ordenamiento y tamaño de arreglo
+        List<Integer> tamaños = Arrays.asList(100, 50000, 100000);
+
         for (String algoritmo : Arrays.asList("Merge Sort", "Bubble Sort", "Shell Sort", "Selection Sort", "Insertion Sort", "Quick Sort")) {
             for (int tam : tamaños) {
-                // Crear una tarea y enviarla al ExecutorService para su ejecución
                 Future<?> future = executor.submit(() -> {
-                    // Tiempo de inicio de la ejecución de la tarea
                     long startTime = System.currentTimeMillis();
-    
-                    // Contador para el número de colecciones ordenadas por este algoritmo
                     int ordenadosPorAlgoritmo = 0;
-    
-                    // Realizar la ordenación mientras no haya transcurrido el tiempo total especificado
-                    while (System.currentTimeMillis() - startTime < tiempoTotal * 1000) {
+
+                    while ((System.currentTimeMillis() - startTime) < (tiempoTotal * 1000)) {
                         int[] arreglo;
                         if (algoritmo.equals("Quick Sort")) {
                             arreglo = generarArregloV2(tam);
                         } else {
                             arreglo = generarArreglo(tam);
                         }
-                        // Llamar al método de ordenamiento correspondiente
                         ordenar(arreglo, algoritmo);
                         ordenadosPorAlgoritmo++;
                     }
-                    // Registrar el número total de colecciones ordenadas por este algoritmo
                     ordenados.put(algoritmo + " - Tamaño " + tam, ordenadosPorAlgoritmo);
-                    // Calcular el tiempo promedio por colección para este algoritmo
                     double tiempoPromedio = (double) (System.currentTimeMillis() - startTime) / ordenadosPorAlgoritmo;
-                    // Almacenar el tiempo promedio en el mapa de tiempos
                     tiempos.put(algoritmo + " - Tamaño " + tam, tiempoPromedio);
                 });
-                // Agregar el objeto Future a la lista de futuros para su seguimiento
                 futures.add(future);
             }
         }
-    
-        // Esperar a que todas las tareas de ordenamiento se completen
+
+        scheduler.schedule(() -> {
+            // Cancelar todas las tareas pendientes después del tiempo total especificado
+            futures.forEach(future -> future.cancel(true));
+        }, tiempoTotal, TimeUnit.SECONDS);
+
         for (Future<?> future : futures) {
             try {
                 future.get();
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
+            } catch (CancellationException e) {
+                System.err.println("Tarea cancelada: " + e.getMessage());
             }
         }
-    
-        // Detener el ExecutorService después de que se completen todas las tareas
+
         executor.shutdown();
-    
-        // Ordenar los algoritmos por eficiencia (tiempo promedio por colección)
+
         List<Map.Entry<String, Double>> list = new ArrayList<>(tiempos.entrySet());
         list.sort(Map.Entry.comparingByValue());
-    
-        // Imprimir los resultados de las pruebas de ordenamiento
+
         System.out.println("Resultados:");
         for (Map.Entry<String, Double> entry : list) {
             String algoritmo = entry.getKey();
             int cantidadOrdenada = ordenados.get(algoritmo);
             double tiempoPromedio = entry.getValue();
-    
-            // Formatear el tiempo promedio según sea necesario
+
             if(tiempoPromedio < 1000){
-                // Redondear el tiempo promedio a 5 decimales y mostrar en milisegundos
                 String tiempoFormateado = String.format("%.5f", tiempoPromedio);
                 System.out.println(algoritmo + ": Colecciones ordenadas = " + cantidadOrdenada + ", Tiempo promedio por colección = " + tiempoFormateado + " ms");
             }
             else if(tiempoPromedio >= 1000){
-                // Convertir el tiempo promedio a segundos y redondear a 5 decimales
                 tiempoPromedio = tiempoPromedio/1000;
                 String tiempoFormateado = String.format("%.5f", tiempoPromedio);
                 System.out.println(algoritmo + ": Colecciones ordenadas = " + cantidadOrdenada + ", Tiempo promedio por colección = " + tiempoFormateado + " segundos");
             }
         }
     }
-    
-
     public static void ordenar(int[] arreglo, String algoritmo) {
         switch (algoritmo) {
             case "Merge Sort":
